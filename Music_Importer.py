@@ -17,10 +17,9 @@ def import_metadata():
 import_metadata()
     
 def Make_and_move():
-
-    enter_track_base = os.path.basename(enter_track)
-    _, file_extension = os.path.splitext(enter_track_base)
-    full_path = os.path.join(Artist_Var, Album_Var, f"{os.path.basename(enter_track)}")
+    _, file_extension = os.path.splitext(enter_track)
+    new_file_name = f"{Title_Track}{file_extension}"
+    full_path = os.path.join(Artist_Var, Album_Var, new_file_name)
 
     if not os.path.exists(os.path.join(Artist_Var, Album_Var)):
         os.makedirs(os.path.join(Artist_Var, Album_Var))
