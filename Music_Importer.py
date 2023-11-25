@@ -1,36 +1,42 @@
 import os
 import shutil
 from tinytag import TinyTag
-def import_metadata():
-    global enter_track
-    enter_track = input("Please enter track here: ")
-    audio = TinyTag.get(enter_track)
-    global Title_Track
-    global Artist_Var
-    global Album_Var
-    Title_Track = str(audio.title)
-    Artist_Var = str(audio.artist)
-    Album_Var = str(audio.album)
-    
 
-    
+def import_metadata(directory="."):
+    global audio_files
+    audio_files = []
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.lower().endswith(('.mp3', '.m4a')):  # Add more extensions as needed
+                audio_path = os.path.join(root, file)
+                audio = TinyTag.get(audio_path)
+                audio_info = {
+                    'Title_Track': str(audio.title),
+                    'Artist_Var': str(audio.artist),
+                    'Album_Var': str(audio.album),
+                    'full_path': os.path.join(root, file)
+                }
+                audio_files.append(audio_info)
+
+    if not audio_files:
+        print("No audio files found in the specified directory or its subdirectories.")
+        exit()
+
 import_metadata()
-    
-def Make_and_move():
-    enter_track_base = os.path.basename(enter_track)
-    _, file_extension = os.path.splitext(enter_track_base)
-    new_file_name = f"{Title_Track}{file_extension}"
-    full_path = os.path.join(Artist_Var, Album_Var, new_file_name)
 
-    if not os.path.exists(os.path.join(Artist_Var, Album_Var)):
-        os.makedirs(os.path.join(Artist_Var, Album_Var))
-        shutil.move(enter_track, full_path)
-        print(f"Directory {Artist_Var}/{Album_Var} create. {Title_Track} moved inside")
+def make_and_move():
+    for audio_info in audio_files:
+        full_path = os.path.join(audio_info['Artist_Var'], audio_info['Album_Var'], f"{audio_info['Title_Track']}.mp3")
+
+        if not os.path.exists(os.path.join(audio_info['Artist_Var'], audio_info['Album_Var'])):
+            os.makedirs(os.path.join(audio_info['Artist_Var'], audio_info['Album_Var']))
         
-    else:
-        shutil.move(enter_track, full_path)
-        print(f"{Title_Track} moved successfully")
-Make_and_move()
+        shutil.move(audio_info['full_path'], full_path)
+        print(f"{audio_info['Title_Track']} moved successfully to {full_path}")
+
+make_and_move()
+
+
 
 
 
