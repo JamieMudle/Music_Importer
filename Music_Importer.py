@@ -8,9 +8,9 @@ def import_metadata():
     global Title_Track
     global Artist_Var
     global Album_Var
-    Title_Track = audio.title
-    Artist_Var = audio.albumartist
-    Album_Var = audio.album
+    Title_Track = str(audio.title)
+    Artist_Var = str(audio.artist)
+    Album_Var = str(audio.album)
     
 
     
