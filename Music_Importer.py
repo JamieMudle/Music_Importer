@@ -15,9 +15,9 @@ def import_metadata(directory="."):
                 audio_path = os.path.join(root, file)
                 audio = TinyTag.get(audio_path)
                 audio_info = {
-                    'Title_Track': str(audio.title),
-                    'Artist_Var': str(audio.artist),
-                    'Album_Var': str(audio.album),
+                    'Title_Track': str(audio.title).replace("\x00", ""),
+                    'Artist_Var': str(audio.artist).replace("\x00", ""),
+                    'Album_Var': str(audio.album).replace("\x00", ""),
                     'full_path': os.path.join(root, file)
                 }
                 audio_files.append(audio_info)
@@ -33,9 +33,9 @@ def make_and_move():
     for audio_info in tqdm(audio_files, desc='Processing', unit='file'):
         file_base = os.path.basename(audio_path)
         _, file_extension = os.path.splitext(file_base)
-        artist_var = audio_info['Artist_Var'].replace("/", "_")
-        album_var = audio_info['Album_Var'].replace("/", "_")
-        title_track = audio_info['Title_Track'].replace("/", "_")
+        artist_var = audio_info['Artist_Var'].replace("/", "_").replace("\x00", "")
+        album_var = audio_info['Album_Var'].replace("/", "_").replace("\x00", "")
+        title_track = audio_info['Title_Track'].replace("/", "_").replace("\x00", "")
         full_path = os.path.join(artist_var, album_var, f"{title_track}{file_extension}")
 
         if not os.path.exists(os.path.join(artist_var, album_var)):
