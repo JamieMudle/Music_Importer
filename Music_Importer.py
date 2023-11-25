@@ -1,6 +1,7 @@
 import os
 import shutil
 from tinytag import TinyTag
+from tqdm import tqdm
 
 def import_metadata(directory="."):
     global audio_files
@@ -25,17 +26,16 @@ def import_metadata(directory="."):
 import_metadata()
 
 def make_and_move():
-    for audio_info in audio_files:
+    for audio_info in tqdm(audio_files, desc='Processing', unit='file'):
         full_path = os.path.join(audio_info['Artist_Var'], audio_info['Album_Var'], f"{audio_info['Title_Track']}.mp3")
 
         if not os.path.exists(os.path.join(audio_info['Artist_Var'], audio_info['Album_Var'])):
             os.makedirs(os.path.join(audio_info['Artist_Var'], audio_info['Album_Var']))
         
         shutil.move(audio_info['full_path'], full_path)
-        print(f"{audio_info['Title_Track']} moved successfully to {full_path}")
+        tqdm.write(f"{audio_info['Title_Track']} moved successfully to {full_path}")
 
 make_and_move()
-
 
 
 
