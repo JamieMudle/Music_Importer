@@ -23,9 +23,13 @@ Files with no metadata or issues with metadata will end up in several places dep
 ----------------------------------Installation-----------------------------------------------------------
 
 Clone the repository down
+
 Install python in whichever way is appropriate for your OS
+
 pip install tinytag and tqdm 
-move the Music_Importer.py file into the parent directory you'd like to work with. 
+
+move the Music_Importer.py file into the parent directory you'd like to work with.
+
 run the program with python Music_Importer.py or python3 Music_Importer.py
 
 ---------------------------------Contact-----------------------------------------------------------------
