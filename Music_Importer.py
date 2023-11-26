@@ -32,18 +32,13 @@ def make_and_move(audio_files):
         album_var = audio_info['Album_Var'].replace("/", " ").replace("+", "and").replace(":", "-").replace("\x00", "").strip()
         title_track = audio_info['Title_Track'].replace("/", " ").replace("+", "and").replace(":", "-").replace("\x00", "").strip()
 
-        # Replace spaces with a placeholder character
-        artist_var = artist_var.replace(" ", "") if artist_var else "Unknown Artist"
-        album_var = album_var.replace(" ", "") if album_var else "Unknown Album"
-        title_track = title_track.replace(" ", "") if title_track else "Unknown Track"
+        # Set default file name
+        default_file = "Unknown File"
 
         full_path = os.path.join(artist_var, album_var, f"{title_track}{file_extension}")
 
         if artist_var and album_var:
             full_path = os.path.join(artist_var, album_var, f"{title_track}{file_extension}")
-
-            # Set default file name
-            default_file = "Unknown File"
 
             if not os.path.exists(os.path.join(artist_var, album_var)):
                 try:
@@ -73,14 +68,25 @@ def make_and_move(audio_files):
                     tqdm.write(f"{title_track} moved successfully to {full_path}")
                 else:
                     print(f"Error: Source file not found - {audio_info['full_path']}")
+        else:
+            # Handle the case where the album is missing but the artist and title are present
+            if artist_var and title_track:
+                full_path = os.path.join(artist_var, default_file, f"{title_track}{file_extension}")
+
+                if not os.path.exists(os.path.join(artist_var, default_file)):
+                    try:
+                        os.makedirs(os.path.join(artist_var, default_file))
+                    except OSError as e:
+                        print(f"Error creating directory: {os.path.join(artist_var, default_file)}")
+                        print(e)
+
+                if os.path.exists(audio_info['full_path']):
+                    shutil.move(audio_info['full_path'], full_path)
+                    tqdm.write(f"{title_track} moved successfully to {full_path}")
+                else:
+                    print(f"Error: Source file not found - {audio_info['full_path']}")
 
 audio_files = import_metadata()
 make_and_move(audio_files)
-
-
-
-
-
-
 
         
