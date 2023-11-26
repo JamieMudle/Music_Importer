@@ -34,7 +34,7 @@ run the program with python Music_Importer.py or python3 Music_Importer.py
 
 ---------------------------------------Windows-----------------------------------------------------------
 
-Navigate to the build folder and copy the files you want to be moved and imported into the folder. 
+Navigate to the build/exe.win-amd64-3.11 folder and copy the files you want to be moved and imported into the folder. 
 Run the exectuable. 
 You can then move the files back.
 
