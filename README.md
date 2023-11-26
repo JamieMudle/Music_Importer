@@ -21,7 +21,7 @@ Files with no metadata or issues with metadata will end up in several places dep
     Any other replacements will follow the None style so there may be the occasional None element within the file structure
 
 ----------------------------------Installation-----------------------------------------------------------
-
+----------------------------Mac OSX/Linux----------------------------------------------------------------
 Clone the repository down
 
 Install python in whichever way is appropriate for your OS
@@ -31,6 +31,13 @@ pip install tinytag and tqdm
 move the Music_Importer.py file into the parent directory you'd like to work with.
 
 run the program with python Music_Importer.py or python3 Music_Importer.py
+
+---------------------------------------Windows-----------------------------------------------------------
+
+Navigate to the build folder and copy the files you want to be moved and imported into the folder. 
+Run the exectuable. 
+You can then move the files back.
+
 
 ---------------------------------Contact-----------------------------------------------------------------
 

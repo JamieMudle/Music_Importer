@@ -95,4 +95,3 @@ def make_and_move(audio_info):
 audio_files = import_metadata()
 for audio_info in tqdm(audio_files, desc='Processing', unit='file'):
     make_and_move(audio_info)
-
