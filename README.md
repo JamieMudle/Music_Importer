@@ -8,6 +8,13 @@ once it finds the files it reads the metadata and then cretes directories for th
 
 If the directory for either artist or album exsists it should place the renamed files inside the appropriate directory. If there are no files ending in .mp3 or .m4a in the directory it will produce a message to inform you of this. 
 
+Files with no metadata or issues with metadata will end up in several places depending on the issue those are listed below:
+    For files that have no artist, album, or title. They will be left outside in the main folder. 
+    For files that have no artist, they will end up in an unknown artist file. The remaining metadata should be used as intended. 
+    For files that have no artist or album. These will be in a None folder with None as the album. However, the title should be okay. 
+    For files with no album they'll be in the artist folder with the album listed as unknown album and the title will be as intended. 
+    Any other replacements will follow the None style so there may be the occasional None element within the file structure
+
 ----------------------------------Installation-----------------------------------------------------------
 
 Clone the repository down
