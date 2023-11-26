@@ -2,10 +2,10 @@ import os
 import shutil
 from tinytag import TinyTag
 from tqdm import tqdm
-
+# Function to clean strings, replacing elements that have caused errors in the past.
 def clean_string(s):
     return str(s).replace("/", " ").replace("+", "and").replace(":", "-").replace("\x00", "").strip() if s is not None else ""
-
+# Function to read metadata, clean it with clean_string and import it for use in movement function
 def import_metadata(directory="."):
     audio_files = []
     for root, _, files in os.walk(directory):
@@ -26,7 +26,7 @@ def import_metadata(directory="."):
         exit()
 
     return audio_files
-
+# Function to take metadata, construct folders and move files. 
 def make_and_move(audio_info):
     file_base = os.path.basename(audio_info['full_path'])
     _, file_extension = os.path.splitext(file_base)
@@ -91,7 +91,7 @@ def make_and_move(audio_info):
     except FileNotFoundError:
         print(f"Error: Source file not found - {audio_info['full_path']}")
 
-# Main execution
+# Execture files and generate progress bar.
 audio_files = import_metadata()
 for audio_info in tqdm(audio_files, desc='Processing', unit='file'):
     make_and_move(audio_info)
