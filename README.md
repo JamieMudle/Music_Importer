@@ -13,6 +13,7 @@ Files with no metadata or issues with metadata will end up in several places dep
     For files that have no artist, they will end up in an unknown artist file. The remaining metadata should be used as intended. 
     For files that have no artist or album. These will be in a None folder with None as the album. However, the title should be okay. 
     For files with no album they'll be in the artist folder with the album listed as unknown album and the title will be as intended. 
+    Any other replacements will follow the None style so there may be the occasional None element within the file structure
 
 ----------------------------------Installation-----------------------------------------------------------
 
